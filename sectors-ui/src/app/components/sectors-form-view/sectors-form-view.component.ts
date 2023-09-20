@@ -37,6 +37,9 @@ export class SectorsFormViewComponent implements OnInit {
       this.sectors = sectors;
       this.prefillFromExisting();
       this.isViewReady = true;
+    }, error => {
+      this.isViewReady = true;
+      this.snackBar.open('Failed fetching sectors, please try again.', 'OK');
     });
   }
 
