@@ -1,0 +1,22 @@
+#FROM openjdk:17-jdk AS build
+#RUN mkdir -p /workspace/app/sectors
+#WORKDIR /workspace/app/sectors
+#COPY mvnw .
+#COPY .mvn .mvn
+#COPY src src
+#COPY pom.xml .
+#EXPOSE 8080
+#ENTRYPOINT ["./mvnw","spring-boot:run"]
+
+FROM maven:3.6.3-openjdk-17-slim AS build
+COPY src /usr/src/app/src
+COPY pom.xml /usr/src/app
+RUN mvn -f /usr/src/app/pom.xml clean package -DskipTests
+
+#
+# PACKAGE STAGE
+#
+FROM openjdk:17-jdk-slim
+COPY --from=build /usr/src/app/target/sectors-0.0.1-SNAPSHOT.jar /usr/app/sectors-0.0.1-SNAPSHOT.jar
+EXPOSE 8080
+CMD ["java","-jar","/usr/app/sectors-0.0.1-SNAPSHOT.jar"]

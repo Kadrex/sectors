@@ -1,0 +1,20 @@
+CREATE TABLE sector (
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    parent_id INTEGER,
+    CONSTRAINT FOREIGN KEY (parent_id) REFERENCES sector(id) ON DELETE CASCADE
+);
+
+CREATE TABLE sector_form (
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    agree_to_terms BOOLEAN NOT NULL
+);
+
+CREATE TABLE sector_form_sector (
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    sector_form_id INTEGER NOT NULL,
+    sector_id INTEGER NOT NULL,
+    CONSTRAINT FOREIGN KEY (sector_form_id) REFERENCES sector_form(id),
+    CONSTRAINT FOREIGN KEY (sector_id) REFERENCES sector(id) ON DELETE CASCADE
+);
