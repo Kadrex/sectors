@@ -1,0 +1,21 @@
+<div>
+  <div *ngFor="let sector of sectors">
+    <!-- Is parent, show children options -->
+    <mat-option *ngIf="sector.children.length > 0">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header class="non-selectable">
+          <mat-panel-title>{{sector.name}}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-multi-select-multi-level-options [sectors]="sector.children" [sectorsForm]="sectorsForm"></app-multi-select-multi-level-options>
+      </mat-expansion-panel>
+    </mat-option>
+
+    <!-- Actual option -->
+    <div class="option" *ngIf="sector.children.length === 0" (click)="select(sector)">
+      <mat-option class="selectable">
+        <mat-checkbox [checked]="selected(sector)" (click)="clickCheckbox($event)"></mat-checkbox>
+        {{sector.name}}
+      </mat-option>
+    </div>
+  </div>
+</div>

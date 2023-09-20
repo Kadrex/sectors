@@ -1,0 +1,7 @@
+<div class="container">
+  <div class="viewButtonContainer">
+    <button *ngIf="!isAdminView" mat-raised-button routerLink="/admin" color="accent">Admin view</button>
+    <button *ngIf="isAdminView" mat-raised-button routerLink="" color="accent">User view</button>
+  </div>
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,41 @@
+mat-option {
+  height: max-content !important;
+}
+
+.non-selectable {
+  background-color: #d5acac !important;
+}
+
+.option {
+  display: flex;
+}
+
+.option mat-checkbox {
+  top: -1px;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-right: 14px;
+  margin-left: 11px;
+}
+
+.option mat-option {
+  width: 100%
+}
+
+mat-expansion-panel, mat-option {
+  background-color: #ffeded !important;
+}
+
+mat-expansion-panel {
+  border: 2px solid #d5acac;
+}
+
+mat-option {
+  padding-left: 0;
+  padding-right: 0;
+  margin-top: 5px;
+}
+
+mat-expansion-panel-header {
+  border-radius: 0;
+}

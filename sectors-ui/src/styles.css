@@ -1,0 +1,19 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+
+.spinner-container {
+  height: 100%;
+  min-height: 300px;
+}
+
+mat-spinner {
+  margin: auto;
+  top: 100px;
+}
+
+body {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: Google Sans,Roboto,Helvetica,Arial,sans-serif;
+}
+

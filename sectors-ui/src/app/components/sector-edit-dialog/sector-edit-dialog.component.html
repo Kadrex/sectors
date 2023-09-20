@@ -1,0 +1,31 @@
+<h3>{{!isNewSector ? ('Edit sector: ' + currentSector?.name) : 'Add new sector'}}</h3>
+
+<form [formGroup]="sectorForm">
+  <!-- Name -->
+  <div class="my-1">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input formControlName="name" matInput type="text" placeholder="Billy Elliot">
+      <mat-error *ngIf="hasError('required')">This field is required.</mat-error>
+      <mat-error *ngIf="hasError('maxlength')">Maximum allowed character count is 255.</mat-error>
+      <mat-error *ngIf="hasError('minlength')">Minimum allowed character count is 2.</mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- Parent -->
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Parent</mat-label>
+      <mat-select formControlName="parent">
+        <mat-option [value]="null">--- none ---</mat-option>
+        <mat-option *ngFor="let parentSector of sectors" [value]="parentSector">{{parentSector.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</form>
+
+<!-- Actions -->
+<mat-dialog-actions>
+  <button mat-raised-button (click)="save()" color="primary" [disabled]="sectorForm.invalid">Save</button>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

@@ -1,0 +1,46 @@
+<div *ngIf="isViewReady; else loading" class="table-container">
+  <mat-table [dataSource]="sectors">
+
+    <!-- Number -->
+    <ng-container matColumnDef="no">
+      <mat-header-cell *matHeaderCellDef class="number-column">No.</mat-header-cell>
+      <mat-cell *matCellDef="let sector; let index = index" class="number-column">{{index + 1}}</mat-cell>
+    </ng-container>
+
+    <!-- Name -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let sector">{{sector.name}}</mat-cell>
+    </ng-container>
+
+    <!-- Is parent -->
+    <ng-container matColumnDef="isParent">
+      <mat-header-cell *matHeaderCellDef class="is-parent-column">Is parent</mat-header-cell>
+      <mat-cell *matCellDef="let sector" class="is-parent-column">{{sector.children?.length > 0 ? 'Yes' : 'No'}}</mat-cell>
+    </ng-container>
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef class="row-reverse mr-20 actions-column">Actions</mat-header-cell>
+      <mat-cell *matCellDef="let sector" class="row-reverse actions-column">
+        <button class="btn-delete" mat-icon-button (click)="deleteClicked(sector)" [matTooltip]="'Delete'"><mat-icon>delete</mat-icon></button>
+        <button mat-icon-button color="primary" (click)="editClicked(sector)" [matTooltip]="'Edit'"><mat-icon>edit</mat-icon></button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let sector; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <!-- Add new sector -->
+  <div class="add-btn-container">
+    <button mat-raised-button (click)="addNewClicked()" color="primary"><mat-icon>add</mat-icon> New sector</button>
+  </div>
+</div>
+
+<!-- Loading spinner -->
+<ng-template #loading>
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

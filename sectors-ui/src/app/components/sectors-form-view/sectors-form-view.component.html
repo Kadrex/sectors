@@ -1,0 +1,36 @@
+<div>
+  <form *ngIf="isViewReady; else loading" [formGroup]="sectorsForm" (submit)="save()" style="margin: auto">
+    <!-- Title -->
+    <h2>Please enter your name and pick the Sectors you are currently involved in.</h2>
+
+    <!-- Name -->
+    <div class="my-1">
+      <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input formControlName="name" matInput type="text" placeholder="Billy Elliot">
+      <mat-error *ngIf="hasError('required')">This field is required.</mat-error>
+      <mat-error *ngIf="hasError('maxlength')">Maximum allowed character count is 255.</mat-error>
+      <mat-error *ngIf="hasError('minlength')">Minimum allowed character count is 2.</mat-error>
+    </mat-form-field>
+    </div>
+
+    <!-- Sectors -->
+    <div class="my-1">
+      <a>Sectors:</a>
+      <app-multi-select-multi-level-options [sectors]="sectors" [sectorsForm]="sectorsForm"></app-multi-select-multi-level-options>
+    </div>
+
+    <!-- Agree to terms -->
+    <mat-checkbox formControlName="agreeToTerms" class="my-1">Agree to terms</mat-checkbox>
+
+    <!-- Save button -->
+    <button mat-raised-button type="submit" color="primary" [disabled]="sectorsForm.invalid">Save</button>
+  </form>
+</div>
+
+<!-- Loading spinner -->
+<ng-template #loading>
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
