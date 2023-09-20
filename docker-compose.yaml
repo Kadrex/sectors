@@ -1,0 +1,19 @@
+services:
+  backend:
+    build: ./sectors
+    container_name: sectors
+    ports:
+      - 8080:8080
+    networks:
+      - sectors-network
+  frontend:
+    build: ./sectors-ui
+    container_name: sectors-ui
+    ports:
+      - 4200:4200
+    networks:
+      - sectors-network
+networks:
+  sectors-network:
+    driver: bridge
+
